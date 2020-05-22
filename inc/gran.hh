@@ -1,7 +1,6 @@
 #ifndef GRAN_HH
 #define GRAN_HH
 #include "bryla.hh"
-#include "interfejs_rys.hh"
 #include <iostream>
 #include "Dr3D_gnuplot_api.hh"
 

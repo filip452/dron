@@ -1,7 +1,9 @@
 #include <iostream>
+#include "wek.hh"
 #include "macierz.hh"
-#include "prost.hh"
 #include "dron.hh"
+#include "dno.hh"
+#include "tafla.hh"
 #include "Dr3D_gnuplot_api.hh"
 
 using std::cout;
@@ -20,26 +22,30 @@ void wait4key() {
 
 int main()
 {
-  std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(0,25,-10,10,0,10,1000));
-
-  api->change_ref_time_ms(0);
-
-  dron d1;
+  std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-25,25,-25,25,0,20,0));
 
   wektor<double,3> poz;
-  poz[0]=5;
-  poz[1]=0;
-  poz[2]=5;
-
-  d1.ustaw(poz);
+  poz[2]=10; 
   
-  d1.rysuj(api);
+  dron d;
+  d.ustaw(poz);
+  d.rysuj(api);
   
-  wait4key();
-
-  d1.plyn(api,8);
-  
-  wait4key();
+  char opcja;
+  cin>>opcja;
+  while(opcja!='k')
+    {
+      switch(opcja)
+	{
+	case 'r':
+	  double odl;
+	  cout<<"Podaj wartosc przemieszczenia drona.\n";
+		cin>>odl;
+	  d.plyn(api,odl);
+	  break;
+	}
+      cin>>opcja;
+    }
   
   return 0;
 }

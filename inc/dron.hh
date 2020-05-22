@@ -11,7 +11,7 @@ using drawNS::APIGnuPlot3D;
 
 class dron: public prost, public gran
 {
-  wektor<double,3> tab;
+protected:
   int czesci[3];
 public:
   void ustaw(wektor<double,3> poz);

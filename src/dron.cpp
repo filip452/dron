@@ -7,7 +7,8 @@ using drawNS::APIGnuPlot3D;
 
 void dron::ustaw(wektor<double,3> poz)
 {
-  tab=poz;
+  for(int i=0;i<3;i++)
+    prost::tab[i]=poz[i];
 }
 void dron::usun(std::shared_ptr<drawNS::Draw3DAPI> api)
 {
@@ -19,9 +20,9 @@ void dron::rysuj(std::shared_ptr<drawNS::Draw3DAPI> api)
   gran sr1,sr2;
   prost kad;
 
-  kad[0]=tab[0];
-  kad[1]=tab[1];
-  kad[2]=tab[2];
+  kad[0]=prost::tab[0];
+  kad[1]=prost::tab[1];
+  kad[2]=prost::tab[2];
   
   wektor<double,3> wym_k;
   wym_k[0]=8;
@@ -32,13 +33,13 @@ void dron::rysuj(std::shared_ptr<drawNS::Draw3DAPI> api)
   wym_sr[0]=0.5;
   wym_sr[1]=1.5;
   
-  sr1[0]=tab[0]-4.25;
-  sr1[1]=tab[1]+1;
-  sr1[2]=tab[2];
+  sr1[0]=prost::tab[0]-4.25;
+  sr1[1]=prost::tab[1]+1;
+  sr1[2]=prost::tab[2];
   
-  sr2[0]=tab[0]-4.25;
-  sr2[1]=tab[1]-1;
-  sr2[2]=tab[2];
+  sr2[0]=prost::tab[0]-4.25;
+  sr2[1]=prost::tab[1]-1;
+  sr2[2]=prost::tab[2];
 
   kad.zmien_wymiary(wym_k);
   sr1.zmien_wymiary(wym_sr);
@@ -53,7 +54,7 @@ void dron::plyn(std::shared_ptr<drawNS::Draw3DAPI> api,double r)
   for(int i=0;i<r*5;i++)
     {
       usun(api);
-      tab[0]=tab[0]+0.2;
+      prost::tab[0]=prost::tab[0]+0.2;
       rysuj(api);
       
       ile-=0.2;
@@ -61,7 +62,7 @@ void dron::plyn(std::shared_ptr<drawNS::Draw3DAPI> api,double r)
   if(ile!=0)
     {
       usun(api);
-      tab[0]=tab[0]+ile;
+      prost::tab[0]=prost::tab[0]+ile;
       rysuj(api);
     }
 }
