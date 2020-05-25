@@ -53,6 +53,6 @@ void prost::obroc(double kat)
 {
   double sigma=(kat/180)*3.1416;
   orientacja=orientacja+sigma;
-  while(orientacja>360)
-    orientacja=orientacja-360;
+  while(orientacja>6.2832)
+    orientacja=orientacja-6.2832;
 }

@@ -10,6 +10,7 @@ void dron::ustaw(wektor<double,3> poz)
 {
   for(int i=0;i<3;i++)
     prost::tab[i]=poz[i];
+  prost::orientacja=0;
 }
 void dron::usun(std::shared_ptr<drawNS::Draw3DAPI> api)
 {
@@ -20,7 +21,6 @@ void dron::rysuj(std::shared_ptr<drawNS::Draw3DAPI> api)
 {
   gran sr1,sr2;
   prost kad;
-  prost::orientacja=45;
 
   kad[0]=prost::tab[0];
   kad[1]=prost::tab[1];
@@ -35,26 +35,26 @@ void dron::rysuj(std::shared_ptr<drawNS::Draw3DAPI> api)
   wym_sr[0]=0.5;
   wym_sr[1]=1.5;
   
-  przes[0]=-4.25; przes[1]=1; przes[2]=0;
-  przes=m_obr(prost::orientacja)*przes;
+  przes[0]=-4.25; przes[1]=-1; przes[2]=0;
 
   sr1[0]=prost::tab[0]+przes[0];
   sr1[1]=prost::tab[1]+przes[1];
   sr1[2]=prost::tab[2];
   
   sr2[0]=prost::tab[0]-4.25;
-  sr2[1]=prost::tab[1]-1;
+  sr2[1]=prost::tab[1]+1;
   sr2[2]=prost::tab[2];
 
   kad.zmien_wymiary(wym_k);
-  kad.obroc(prost::orientacja);
-  sr1.obroc(prost::orientacja);
-  sr2.obroc(prost::orientacja);
+  kad.obroc(prost::orientacja*180/3.1416);
+  sr1.obroc(prost::orientacja*180/3.1416);
+  sr2.obroc(prost::orientacja*180/3.1416);
   sr1.zmien_wymiary(wym_sr);
   sr2.zmien_wymiary(wym_sr);
   kad.rysuj(api,czesci[0]);
   sr1.rysuj(api,czesci[1]);
-  //sr2.rysuj(api,czesci[2]);
+  sr1[1]=prost::tab[1]-przes[1];
+  sr2.rysuj(api,czesci[2]);
 }
 void dron::plyn(std::shared_ptr<drawNS::Draw3DAPI> api,double r)
 {

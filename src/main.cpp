@@ -32,8 +32,8 @@ int main()
   dno.ustaw_wym(wym_plasz);
   t.ustaw_wym(wym_plasz);
   
-  //dno.rysuj(api);
-  //t.rysuj(api);
+  dno.rysuj(api);
+  t.rysuj(api);
   
   wektor<double,3> poz;
   poz[2]=10;
@@ -43,23 +43,33 @@ int main()
   d.ustaw(poz);
   d.rysuj(api);
 
-  wait4key();
-
-  /*char opcja;
+  char opcja;
   cin>>opcja;
   while(opcja!='k')
     {
+      cout<<"Prosze wybrac opcje:";
+      cout<<"r - ruch do przodu,";
+      cout<<"o - obrot woko; osi z,";
+      cout<<"m - menu";
+      cout<<"k - koniec.";
       switch(opcja)
 	{
 	case 'r':
 	  double odl;
-	  cout<<"Podaj wartosc przemieszczenia drona.\n";
+	  cout<<"Podaj wartosc przemieszczenia drona:\n";
 		cin>>odl;
 	  d.plyn(api,odl);
 	  break;
+	case 'o':
+	  double kat;
+	  cout<<"Podaj kat obrotu:\n";
+	  cin>>kat;
+	  d.prost::obroc(kat);
+	  d.usun(api);
+	  d.rysuj(api);
 	}
       cin>>opcja;
-      }*/
+      }
 
   delete &api;
   

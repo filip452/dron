@@ -18,7 +18,7 @@ void tafla::rysuj(std::shared_ptr<drawNS::Draw3DAPI> api)
 		drawNS::Point3D(x,y,18),drawNS::Point3D(x+5,y,20),drawNS::Point3D(x+10,y,18)
 		  },{
 		drawNS::Point3D(x,y+5,18),drawNS::Point3D(x+5,y+5,20),drawNS::Point3D(x+10,y+5,18)
-		  }},"red");
+		  }},"blue");
 	  y=y+5;
 	}
       x=x+10;

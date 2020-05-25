@@ -31,7 +31,7 @@ obj/prost.o: inc/prost.hh src/prost.cpp inc/bryla.hh
 obj/gran.o: inc/gran.hh src/gran.cpp inc/bryla.hh
 	g++ ${CPPFLAGS} -o obj/gran.o src/gran.cpp
 
-obj/dron.o: inc/dron.hh src/dron.cpp inc/prost.hh inc/gran.hh inc/sruba.hh
+obj/dron.o: inc/dron.hh src/dron.cpp inc/prost.hh inc/gran.hh
 	g++ ${CPPFLAGS} -o obj/dron.o src/dron.cpp
 
 obj/dno.o: inc/dno.hh src/dno.cpp
