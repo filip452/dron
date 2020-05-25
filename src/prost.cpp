@@ -29,15 +29,15 @@ void prost::rysuj(std::shared_ptr<drawNS::Draw3DAPI> api,int & p)
     pkt[i]=m_obr(orientacja)*pkt[i];
   
   p=api->draw_polyhedron(vector<vector<Point3D> > {{
-	drawNS::Point3D(pkt[1][0],pkt[0][1],pkt[0][2]),
-	  drawNS::Point3D(pkt[0][0],pkt[1][1],pkt[1][2]),
-	  drawNS::Point3D(pkt[3][0],pkt[2][1],pkt[2][2]),
-	  drawNS::Point3D(pkt[2][0],pkt[3][1],pkt[3][2])  
+	drawNS::Point3D(pkt[0][0],pkt[0][1],pkt[0][2]),
+	  drawNS::Point3D(pkt[1][0],pkt[1][1],pkt[1][2]),
+	  drawNS::Point3D(pkt[2][0],pkt[2][1],pkt[2][2]),
+	  drawNS::Point3D(pkt[3][0],pkt[3][1],pkt[3][2])  
 	  },{
-        drawNS::Point3D(pkt[1][0],pkt[0][1],pkt[0][2]-w[2]*2),
-	  drawNS::Point3D(pkt[0][0],pkt[1][1],pkt[1][2]-w[2]*2),
-	  drawNS::Point3D(pkt[3][0],pkt[2][1],pkt[2][2]-w[2]*2),
-	  drawNS::Point3D(pkt[2][0],pkt[3][1],pkt[3][2]-w[2]*2)  
+        drawNS::Point3D(pkt[0][0],pkt[0][1],pkt[0][2]-w[2]*2),
+	  drawNS::Point3D(pkt[1][0],pkt[1][1],pkt[1][2]-w[2]*2),
+	  drawNS::Point3D(pkt[2][0],pkt[2][1],pkt[2][2]-w[2]*2),
+	  drawNS::Point3D(pkt[3][0],pkt[3][1],pkt[3][2]-w[2]*2)  
 	  }});
 }
 

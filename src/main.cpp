@@ -32,17 +32,20 @@ int main()
   dno.ustaw_wym(wym_plasz);
   t.ustaw_wym(wym_plasz);
   
-  dno.rysuj(api);
-  t.rysuj(api);
+  //dno.rysuj(api);
+  //t.rysuj(api);
   
   wektor<double,3> poz;
   poz[2]=10;
   
   dron d;
+  //obroc(45);
   d.ustaw(poz);
   d.rysuj(api);
-  
-  char opcja;
+
+  wait4key();
+
+  /*char opcja;
   cin>>opcja;
   while(opcja!='k')
     {
@@ -56,7 +59,9 @@ int main()
 	  break;
 	}
       cin>>opcja;
-      }
+      }*/
+
+  delete &api;
   
   return 0;
 }
