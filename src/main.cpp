@@ -24,8 +24,19 @@ int main()
 {
   std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-25,25,-25,25,0,20,0));
 
+  double wym_plasz[4];
+  dno dno;
+  tafla t;
+
+  wym_plasz[0]=25; wym_plasz[1]=-25; wym_plasz[2]=25; wym_plasz[3]=-25;
+  dno.ustaw_wym(wym_plasz);
+  t.ustaw_wym(wym_plasz);
+  
+  dno.rysuj(api);
+  t.rysuj(api);
+  
   wektor<double,3> poz;
-  poz[2]=10; 
+  poz[2]=10;
   
   dron d;
   d.ustaw(poz);
@@ -45,7 +56,7 @@ int main()
 	  break;
 	}
       cin>>opcja;
-    }
+      }
   
   return 0;
 }
