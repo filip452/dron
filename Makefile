@@ -4,10 +4,11 @@ __start__: dron
 	./dron
 
 dron: obj/main.o obj/wek.o obj/macierz.o obj/Dr3D_gnuplot_api.o\
-	 obj/prost.o obj/gran.o obj/dron.o obj/dno.o obj/tafla.o
+	 obj/prost.o obj/gran.o obj/dron.o obj/dno.o obj/tafla.o\
+	 obj/przesz.o
 	 g++ -Wall -pedantic -o dron obj/main.o obj/wek.o obj/macierz.o\
 	  obj/Dr3D_gnuplot_api.o obj/prost.o obj/gran.o obj/dron.o\
-	 obj/dno.o obj/tafla.o -lpthread
+	 obj/dno.o obj/tafla.o obj/przesz.o -lpthread
 
 obj/main.o: src/main.cpp inc/macierz.hh inc/prost.hh\
 	 inc/Dr3D_gnuplot_api.hh inc/dron.hh
@@ -39,6 +40,9 @@ obj/dno.o: inc/dno.hh src/dno.cpp
 
 obj/tafla.o: inc/tafla.hh src/tafla.cpp
 	g++ ${CPPFLAGS} -o obj/tafla.o src/tafla.cpp
+
+obj/przesz.o: inc/przesz.hh src/przesz.cpp
+	g++ ${CPPFLAGS} -o obj/przesz.o src/przesz.cpp
 
 clear:
 	rm -f obj/*.o dron

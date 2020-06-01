@@ -1,6 +1,9 @@
 #include "dron.hh"
 #include "Dr3D_gnuplot_api.hh"
 #include "mac_obr.hh"
+#include <cmath>
+#include <iostream>
+#include "przesz.hh"
 
 using std::vector;
 using drawNS::Point3D;
@@ -56,13 +59,27 @@ void dron::rysuj(std::shared_ptr<drawNS::Draw3DAPI> api)
   sr1[1]=prost::tab[1]-przes[1];
   sr2.rysuj(api,czesci[2]);
 }
-void dron::plyn(std::shared_ptr<drawNS::Draw3DAPI> api,double r)
+void dron::plyn(std::shared_ptr<drawNS::Draw3DAPI> api,double r,double kat_w,przesz p[3])
 {
-  double ile=r;
+  double sr_dron[3];
+  double ile=r,h;
+  h=tan((kat_w/180)*3.1416)*r;
+  h=h/(r*5);
+  
   for(int i=0;i<r*5;i++)
     {
+      for(int i=0;i<3;i++)
+	sr_dron[i]=tab[i];
+      for(int i=0;i<3;i++)
+	if(p[i].czy_kolizja(sr_dron)==true)
+	  {
+	    std::cout<<"Kolizja\n";
+	    exit(1);
+	  }
+      
       usun(api);
       prost::tab[0]=prost::tab[0]+0.2;
+      prost::tab[2]=prost::tab[2]+h;
       rysuj(api);
       
       ile-=0.2;
@@ -71,6 +88,7 @@ void dron::plyn(std::shared_ptr<drawNS::Draw3DAPI> api,double r)
     {
       usun(api);
       prost::tab[0]=prost::tab[0]+ile;
+      prost::tab[2]=prost::tab[2]+h;
       rysuj(api);
     }
 }
