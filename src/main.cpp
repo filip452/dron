@@ -165,6 +165,7 @@ int main()
 	  float ile;
 	  int znak;
 	  if(kat<0) znak=-1;
+	  else znak=1;
 	  ile=abs(kat/5);
 	  for(int i=0;i<ile;i++)
 	    {
