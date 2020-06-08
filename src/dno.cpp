@@ -21,3 +21,10 @@ void dno::rysuj(std::shared_ptr<drawNS::Draw3DAPI> api)
       x=x+5;
     }
 }
+
+bool dno::czy_kolizja(wektor<double,3> d) 
+{
+  if(d[2]<2)
+    return true;
+  return false;
+}

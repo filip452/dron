@@ -24,3 +24,10 @@ void tafla::rysuj(std::shared_ptr<drawNS::Draw3DAPI> api)
       x=x+10;
     }
 }
+
+bool tafla::czy_kolizja(wektor<double,3> d) 
+{
+  if(d[2]>18)
+    return true;
+  return false;
+}

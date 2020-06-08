@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "wek.hh"
 #include "macierz.hh"
 #include "dron.hh"
@@ -11,14 +12,14 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-using std::vector;
+using std::string;
 using drawNS::Point3D;
 using drawNS::APIGnuPlot3D;
 
 int main()
 {
-  std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-25,25,-25,25,0,20,0));
-
+  std::shared_ptr<drawNS::Draw3DAPI> api(new APIGnuPlot3D(-25,25,-25,25,0,25,0));
+  
   double wym_plasz[4];
   dno dno;
   tafla t;
@@ -31,49 +32,111 @@ int main()
   t.rysuj(api);
   
   wektor<double,3> poz;
-  poz[2]=10;
-  
-  dron d;
-  //obroc(45);
-  d.ustaw(poz);
-  d.rysuj(api);
 
-  przesz p[3];
+  przesz l_przeszkod[3];
+  dron l_dronow[3];
+  
+  dron d1;
+  poz[2]=10;
+  d1.ustaw(poz);
+  d1.zmien_kolor("red");
+  d1.rysuj(api);
+  l_dronow[0]=d1;
+
+  dron d2;
+  poz[0]=-10;
+  poz[1]=-10;
+  poz[2]=10;
+  d2.ustaw(poz);
+  d2.zmien_kolor("purple");
+  d2.rysuj(api);
+  l_dronow[1]=d2;
+
+  dron d3;
+  poz[0]=-5;
+  poz[1]=15;
+  poz[2]=10;
+  d3.ustaw(poz);
+  d3.zmien_kolor("orange");
+  d3.rysuj(api);
+  l_dronow[2]=d3;
 
   wektor<double,3> wym;
   wym[0]=4;
   wym[1]=4;
   wym[2]=10;
 
-  p[0][0]=10;
-  p[0][1]=4;
-  p[0][2]=5;
+  przesz p1,p2,p3;
+  
+  p1[0]=10;
+  p1[1]=4;
+  p1[2]=5;
 
-  p[0].zmien_wymiary(wym);
+  p1.zmien_wymiary(wym);
+
+  l_przeszkod[0]=p1;
 
   wym[0]=2;
   wym[1]=6;
   wym[2]=8;
 
-  p[1][0]=12;
-  p[1][1]=-6;
-  p[1][2]=8;
+  p2[0]=12;
+  p2[1]=-6;
+  p2[2]=8;
 
-  p[1].zmien_wymiary(wym);
+  p2.zmien_wymiary(wym);
 
+  l_przeszkod[1]=p2;
+  
   wym[0]=6;
   wym[1]=2;
   wym[2]=5;
 
-  p[2][0]=-4;
-  p[2][1]=9;
-  p[2][2]=8;
+  p3[0]=-4;
+  p3[1]=9;
+  p3[2]=8;
 
-  p[2].zmien_wymiary(wym);
+  p3.zmien_wymiary(wym);
 
+  l_przeszkod[2]=p3;
+  
   int IND[3];
   for(int i=0;i<3;i++)
-    p[i].rysuj(api,IND[i]);
+    {
+      l_przeszkod[i].rysuj(api,IND[i],"black");
+    }
+
+  int wybor;
+  char kolor;
+  bool koniec=false;
+  while(!koniec)
+    {
+      cout<<"Prosze wybrac drona:\n";
+      cout<<"c - czerwony\n";
+      cout<<"p - pomaranczowy\n";
+      cout<<"f - fioletowy\n";
+      cin>>kolor;
+      switch(kolor)
+	{
+	case 'c':
+	  wybor=0;
+	  cout<<endl;
+	  koniec=true;
+	  break;
+	case 'p':
+	  wybor=2;
+	  cout<<endl;
+	  koniec=true;
+	  break;
+	case 'f':
+	  wybor=1;
+	  cout<<endl;
+	  koniec=true;
+	  break;
+	default:
+	  cout<<"Nie ma takiej opcji.\n";
+    }
+    }
   
   char opcja='a';
   while(opcja!='k')
@@ -81,7 +144,7 @@ int main()
       cout<<"Prosze wybrac opcje:\n";
       cout<<"r - ruch do przodu,\n";
       cout<<"o - obrot woko; osi z,\n";
-      cout<<"m - menu";
+      cout<<"m - menu\n";
       cout<<"k - koniec.\n";
       cin>>opcja;
       switch(opcja)
@@ -92,15 +155,21 @@ int main()
 	  cin>>odl;
 	  cout<<"Podaj kat wznoszenia:\n";
 	  cin>>kat_w;
-	  d.plyn(api,odl,kat_w,p);
+	  l_dronow[wybor].plyn(api,odl,kat_w,l_przeszkod,l_dronow,t,dno);
 	  break;
 	case 'o':
 	  double kat;
 	  cout<<"Podaj kat obrotu:\n";
 	  cin>>kat;
-	  d.prost::obroc(kat);
-	  d.usun(api);
-	  d.rysuj(api);
+
+	  float ile;
+	  ile=kat/5;
+	  for(int i=0;i<ile;i++)
+	    {
+	      l_dronow[wybor].prost::obroc(5);
+	      l_dronow[wybor].usun(api);
+	      l_dronow[wybor].rysuj(api);
+	    }
 	case 'm':
 	  
 	  break;
