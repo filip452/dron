@@ -163,13 +163,16 @@ int main()
 	  cin>>kat;
 
 	  float ile;
-	  ile=kat/5;
+	  int znak;
+	  if(kat<0) znak=-1;
+	  ile=abs(kat/5);
 	  for(int i=0;i<ile;i++)
 	    {
-	      l_dronow[wybor].prost::obroc(5);
+	      l_dronow[wybor].prost::obroc(znak*5);
 	      l_dronow[wybor].usun(api);
 	      l_dronow[wybor].rysuj(api);
 	    }
+	  break;
 	case 'm':
 	  
 	  break;
